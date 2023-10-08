@@ -18,8 +18,6 @@ public class Pagamento {
     @Column(name = "forma_de_pagamento")
     private String formaDePagamento; // Referência à forma de pagamento
 
-    // Getters e Setters
-
     public Long getId() {
         return id;
     }

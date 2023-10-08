@@ -18,7 +18,6 @@ public class EstacionamentoController {
 
     @PostMapping("/iniciar")
     public ResponseEntity<String> iniciarEstacionamento(@RequestBody PagamentoDTO pagamentoDTO) {
-        // Suponha que você recebeu os dados da forma de pagamento preferida junto com as informações de pagamento
         // Verifique se a forma de pagamento é válida (crédito, débito ou pix)
         String formaDePagamento = pagamentoDTO.getFormaDePagamento();
         if (!"credito".equals(formaDePagamento) && !"debito".equals(formaDePagamento) && !"pix".equals(formaDePagamento)) {
@@ -35,8 +34,6 @@ public class EstacionamentoController {
         // Aqui você pode processar o início do estacionamento, incluindo as informações da forma de pagamento
         LocalDateTime horarioInicio = LocalDateTime.now(); // Supondo que o estacionamento começou agora
         pagamentoDTO.setHorarioInicio(horarioInicio);
-
-        // Faça o que for necessário com as informações da forma de pagamento, como salvar no banco de dados
 
         // Retorne uma mensagem de sucesso
         return ResponseEntity.ok("Estacionamento iniciado com sucesso.");
