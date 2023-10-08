@@ -11,18 +11,22 @@ import java.time.LocalDateTime;
 
 public class PagamentoService {
 
-    public Pagamento calcularPagamento(LocalDateTime horarioInicio, LocalDateTime horarioFim, boolean estacionamentoFixo) {
-        BigDecimal valorCalculado = calcularValor(horarioInicio, horarioFim, estacionamentoFixo);
+    public Pagamento calcularPagamento(LocalDateTime horarioInicio, LocalDateTime horarioFim,
+                                       String formaDePagamento, boolean estacionamentoFixo,
+                                       boolean tempoRealUtilizado) {
+        BigDecimal valorCalculado = calcularValor(horarioInicio, horarioFim, estacionamentoFixo, tempoRealUtilizado);
 
         Pagamento pagamento = new Pagamento();
         pagamento.setHorarioInicio(horarioInicio);
         pagamento.setHorarioFim(horarioFim);
         pagamento.setValor(valorCalculado);
+        pagamento.setFormaDePagamento(formaDePagamento);
 
         return pagamento;
     }
 
-    private BigDecimal calcularValor(LocalDateTime horarioInicio, LocalDateTime horarioFim, boolean estacionamentoFixo) {
+    private BigDecimal calcularValor(LocalDateTime horarioInicio, LocalDateTime horarioFim,
+                                     boolean estacionamentoFixo, boolean tempoRealUtilizado) {
         // Defina a tarifa base por hora (ou outra unidade, dependendo da sua lógica)
         BigDecimal tarifaBasePorHora = BigDecimal.valueOf(5);
 
@@ -31,13 +35,19 @@ public class PagamentoService {
 
         // Verifique se o estacionamento é fixo
         if (estacionamentoFixo) {
-            // Para estacionamento fixo, você pode aplicar uma tarifa específica
-            BigDecimal tarifaFixa = BigDecimal.valueOf(20); // Por exemplo, R$ 20 para estacionamento fixo
-            return tarifaFixa;
+            // Para estacionamento fixo, o valor é calculado com base no tempo fixo
+            return tarifaBasePorHora;
         } else {
             // Para estacionamento variável, calcule com base na duração
             long horasEstacionado = duracao.toHours();
-            return tarifaBasePorHora.multiply(BigDecimal.valueOf(horasEstacionado));
+
+            if (tempoRealUtilizado) {
+                // Se o tempo real foi utilizado, cobre por hora completa
+                return tarifaBasePorHora.multiply(BigDecimal.valueOf(horasEstacionado));
+            } else {
+                // Se o tempo real não foi utilizado, cobre um valor fixo
+                return tarifaBasePorHora;
+            }
         }
     }
 }

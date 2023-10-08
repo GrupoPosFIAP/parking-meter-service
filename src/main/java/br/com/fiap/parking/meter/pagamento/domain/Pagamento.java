@@ -15,8 +15,8 @@ public class Pagamento {
     private LocalDateTime horarioFim;
     private BigDecimal valor;
 
-    @ManyToOne
-    private FormaDePagamento formaDePagamento; // Referência à forma de pagamento
+    @Column(name = "forma_de_pagamento")
+    private String formaDePagamento; // Referência à forma de pagamento
 
     // Getters e Setters
 
@@ -52,11 +52,11 @@ public class Pagamento {
         this.valor = valor;
     }
 
-    public FormaDePagamento getFormaDePagamento() {
+    public String getFormaDePagamento() {
         return formaDePagamento;
     }
 
-    public void setFormaDePagamento(FormaDePagamento formaDePagamento) {
+    public void setFormaDePagamento(String formaDePagamento) {
         this.formaDePagamento = formaDePagamento;
     }
 }

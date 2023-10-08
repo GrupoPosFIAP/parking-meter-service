@@ -44,8 +44,11 @@ public class EstacionamentoController {
 
     @GetMapping("/calcular-pagamento")
     public ResponseEntity<Pagamento> calcularPagamento(@RequestParam LocalDateTime horarioInicio,
-                                                       @RequestParam LocalDateTime horarioFim) {
-        Pagamento pagamento = pagamentoService.calcularPagamento(horarioInicio, horarioFim, false);
+                                                       @RequestParam LocalDateTime horarioFim,
+                                                       @RequestParam String formaDePagamento,
+                                                       @RequestParam boolean estacionamentoFixo,
+                                                       @RequestParam boolean tempoRealUtilizado) {
+        Pagamento pagamento = pagamentoService.calcularPagamento(horarioInicio, horarioFim, formaDePagamento, estacionamentoFixo, tempoRealUtilizado);
         return ResponseEntity.ok(pagamento);
     }
 }

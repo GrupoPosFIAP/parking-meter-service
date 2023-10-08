@@ -12,6 +12,7 @@ public class PagamentoDTO {
     private BigDecimal valor;
     private String formaDePagamento; // Pode ser "credito", "debito" ou "pix"
     private boolean estacionamentoFixo; // Indica se o estacionamento é fixo
+    private boolean tempoRealUtilizado; // Indica se o tempo real foi utilizado
 
     // Getters e Setters
 
@@ -53,6 +54,14 @@ public class PagamentoDTO {
 
     public void setEstacionamentoFixo(boolean estacionamentoFixo) {
         this.estacionamentoFixo = estacionamentoFixo;
+    }
+
+    public boolean isTempoRealUtilizado() {
+        return tempoRealUtilizado;
+    }
+
+    public void setTempoRealUtilizado(boolean tempoRealUtilizado) {
+        this.tempoRealUtilizado = tempoRealUtilizado;
     }
 
 }
