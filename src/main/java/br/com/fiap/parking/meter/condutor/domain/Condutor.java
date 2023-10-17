@@ -1,8 +1,11 @@
 package br.com.fiap.parking.meter.condutor.domain;
 
+import br.com.fiap.parking.meter.veiculo.domain.Veiculo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+
+import java.util.List;
 
 @Entity(name = "tb_condutor")
 public class Condutor {
