@@ -22,7 +22,7 @@ public class Condutor {
     private String telefone;
 
     @NotEmpty(message = "{message.condutor.email}")
-    @Email
+    @Email(message = "{message.condutor.email}")
     private String email;
 
     public Condutor() {

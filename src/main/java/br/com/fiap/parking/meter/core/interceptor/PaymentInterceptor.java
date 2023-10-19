@@ -6,13 +6,16 @@ import br.com.fiap.parking.meter.exception.EntityNotFoundException;
 import br.com.fiap.parking.meter.exception.PaymentRequiredException;
 import br.com.fiap.parking.meter.condutor.repository.CondutorRepository;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequestWrapper;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.util.ContentCachingRequestWrapper;
 
 @Component
 public class PaymentInterceptor implements HandlerInterceptor {
@@ -43,11 +46,6 @@ public class PaymentInterceptor implements HandlerInterceptor {
             throw new PaymentRequiredException("Para realizar esta ação, é necessário cadastrar um método de pagamento");
         }
 
-        StringBuilder sb = new StringBuilder();
-
-        sb.append("Path: ").append(request.getRequestURI())
-                .append(" Método: ").append(request.getMethod());
-        logger.info("Requisição interceptada: " + sb);
         return true;
     }
 

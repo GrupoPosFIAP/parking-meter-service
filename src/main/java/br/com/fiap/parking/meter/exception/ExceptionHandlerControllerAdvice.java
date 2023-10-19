@@ -1,5 +1,7 @@
 package br.com.fiap.parking.meter.exception;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -28,6 +30,15 @@ public class ExceptionHandlerControllerAdvice {
     public ResponseEntity<GenericMessage> handleGenericException(PaymentRequiredException exception) {
         GenericMessage genericMessage = new GenericMessage("PAYMENT_REQUIRED", exception.getMessage());
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(genericMessage);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<GenericMessage> handleConstraintViolationException(ConstraintViolationException exception) {
+
+        ConstraintViolation<?> constraintViolation = exception.getConstraintViolations().stream().findFirst().orElse(null);
+        GenericMessage genericMessage = new GenericMessage(HttpStatus.INTERNAL_SERVER_ERROR.name(), constraintViolation != null ? constraintViolation.getMessage() : null);
+        return ResponseEntity.badRequest().body(genericMessage);
     }
 
 }
