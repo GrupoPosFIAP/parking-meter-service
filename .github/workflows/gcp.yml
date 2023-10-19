@@ -32,7 +32,7 @@ jobs:
 
       # gcloud configure docker
       - name: Configure Docker
-        run: gcloud auth configure-docker --quiet
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev --quiet
 
       # build image
       - name: Build Docker image
