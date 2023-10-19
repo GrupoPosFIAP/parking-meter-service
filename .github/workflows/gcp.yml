@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: gcp
     env:
-      IMAGE_NAME: us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/docker-parking-fiap/parking-meter/parking-meter:latest
+      IMAGE_NAME: us-central1-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/docker-parking-fiap/parking-meter:latest
     steps:
       # Git checkout
       - name: Checkout
