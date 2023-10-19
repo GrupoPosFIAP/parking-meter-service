@@ -2,8 +2,7 @@ name: Deploy no GCP
 
 on:
   push:
-    branches: 
-    - feature/*
+    branches: [main]
 
 jobs:
   deploy:
