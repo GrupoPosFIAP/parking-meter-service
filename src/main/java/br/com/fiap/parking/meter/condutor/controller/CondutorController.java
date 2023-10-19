@@ -3,6 +3,9 @@ package br.com.fiap.parking.meter.condutor.controller;
 import br.com.fiap.parking.meter.condutor.service.CondutorService;
 import br.com.fiap.parking.meter.core.annotations.PaymentPath;
 import br.com.fiap.parking.meter.condutor.dto.CondutorDto;
+import br.com.fiap.parking.meter.veiculo.domain.Veiculo;
+import br.com.fiap.parking.meter.veiculo.dto.VeiculoDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -31,7 +34,7 @@ public class CondutorController {
     }
 
     @PostMapping
-    public ResponseEntity<CondutorDto> insert(@RequestBody CondutorDto condutorDto) {
+    public ResponseEntity<CondutorDto> insert(@Valid @RequestBody CondutorDto condutorDto) {
         CondutorDto condutor = this.condutorService.insert(condutorDto);
         return new ResponseEntity<CondutorDto>(condutor, HttpStatus.CREATED);
     }
@@ -47,5 +50,4 @@ public class CondutorController {
         this.condutorService.delete(id);
         return ResponseEntity.noContent().build();
     }
-
 }
