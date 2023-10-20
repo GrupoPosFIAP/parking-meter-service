@@ -4,10 +4,10 @@ import br.com.fiap.parking.meter.condutor.domain.Condutor;
 import br.com.fiap.parking.meter.condutor.dto.CondutorDto;
 import br.com.fiap.parking.meter.condutor.repository.CondutorRepository;
 import br.com.fiap.parking.meter.exception.EntityNotFoundException;
+import br.com.fiap.parking.meter.veiculo.repository.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,12 +43,10 @@ public class CondutorService {
     public CondutorDto update(Long id, CondutorDto condutorDto) {
 
         Condutor condutor = findById(id);
-
         condutor.setNome(condutorDto.nome());
         condutor.setEmail(condutorDto.email());
         condutor.setEndereco(condutorDto.endereco().toDomain());
         condutor.setTelefone(condutorDto.telefone());
-
         this.condutorRepository.save(condutor);
 
         return condutorDto;
