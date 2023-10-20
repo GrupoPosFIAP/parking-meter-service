@@ -1,7 +1,5 @@
 package br.com.fiap.parking.meter.pagamento.dto;
 
-import br.com.fiap.parking.meter.carro.dto.CarroDto;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
