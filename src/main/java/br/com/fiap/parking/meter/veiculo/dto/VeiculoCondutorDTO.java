@@ -17,7 +17,7 @@ public record VeiculoCondutorDTO(
         @NotBlank(message = "Informe o moodelo do veículo")
         String modelo,
 
-        CondutorDto condutor ) {
+        Long condutorId ) {
 
     public static Veiculo toEntity(VeiculoCondutorDTO dto, Condutor condutor) {
         return new Veiculo(dto, condutor);
@@ -29,7 +29,7 @@ public record VeiculoCondutorDTO(
                 veiculo.getPlaca(),
                 veiculo.getMarca(),
                 veiculo.getModelo(),
-                veiculo.getCondutor() != null ? CondutorDto.from(veiculo.getCondutor()) : null );
+                veiculo.getCondutor().getId() );
     }
 
     public static Veiculo mapperDtoToEntity(VeiculoCondutorDTO dto, Veiculo entity, Condutor condutor) {

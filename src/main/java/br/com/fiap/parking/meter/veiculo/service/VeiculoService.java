@@ -49,33 +49,27 @@ public class VeiculoService {
 
     @Transactional
     public VeiculoCondutorDTO insert(VeiculoCondutorDTO dto) {
-        try {
 
-            var condutor = condutorRepository.getReferenceById(dto.condutor().id());
-            var entity = VeiculoCondutorDTO.toEntity(dto, condutor);
-            var veiculoSaved = veiculoRepository.save(entity);
-            return VeiculoCondutorDTO.fromEntity(veiculoSaved);
-
-        } catch (GenericException e) {
-            throw new ControllerNotFoundException("Condutor não encontrado.");
-        }
+        var condutor = condutorRepository.findById(dto.condutorId()).orElseThrow(
+                () -> new EntityNotFoundException("Condutor não encontrado")
+        );
+        var entity = VeiculoCondutorDTO.toEntity(dto, condutor);
+        var veiculoSaved = veiculoRepository.save(entity);
+        return VeiculoCondutorDTO.fromEntity(veiculoSaved);
     }
 
 
     @Transactional
     public VeiculoCondutorDTO update(Long id, VeiculoCondutorDTO dto) {
 
-        try {
-            Veiculo entity = veiculoRepository.getReferenceById(id);
-            var condutor = condutorRepository.getReferenceById(dto.condutor().id());
+        Veiculo entity = veiculoRepository.getReferenceById(id);
+        var condutor = condutorRepository.findById(dto.condutorId()).orElseThrow(
+                () -> new EntityNotFoundException("Condutor não encontrado")
+        );
 
-            VeiculoCondutorDTO.mapperDtoToEntity(dto, entity, condutor);
-            entity = veiculoRepository.save(entity);
-            return VeiculoCondutorDTO.fromEntity(entity);
-
-        }  catch (EntityNotFoundException e) {
-            throw new ControllerNotFoundException("Condutor/Veículo não encontrados");
-        }
+        VeiculoCondutorDTO.mapperDtoToEntity(dto, entity, condutor);
+        entity = veiculoRepository.save(entity);
+        return VeiculoCondutorDTO.fromEntity(entity);
     }
 
 

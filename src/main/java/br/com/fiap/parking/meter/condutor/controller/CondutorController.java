@@ -25,8 +25,8 @@ public class CondutorController {
     private CondutorService condutorService;
 
     @GetMapping
-    public ResponseEntity<Page<VeiculoCondutorDTO>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
-                                                            @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
+    public ResponseEntity<Page<CondutorDto>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                    @RequestParam(name = "pageSize", defaultValue = "10") int pageSize) {
         PageRequest pageRequest = PageRequest.of(page, pageSize);
         var condutores = condutorService.findAll(pageRequest);
         return ResponseEntity.ok(condutores);

@@ -32,9 +32,9 @@ public class CondutorService {
 
 
     @Transactional(readOnly = true)
-    public Page<VeiculoCondutorDTO> findAll(PageRequest pageRequest) {
-        var condutores = veiculoRepository.findAll(pageRequest);
-        return condutores.map(VeiculoCondutorDTO::fromEntity);
+    public Page<CondutorDto> findAll(PageRequest pageRequest) {
+        var condutores = condutorRepository.findAll(pageRequest);
+        return condutores.map(CondutorDto::from);
     }
 
 
