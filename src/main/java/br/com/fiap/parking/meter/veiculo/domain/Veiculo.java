@@ -1,5 +1,7 @@
 package br.com.fiap.parking.meter.veiculo.domain;
 
+import br.com.fiap.parking.meter.condutor.domain.Condutor;
+import br.com.fiap.parking.meter.veiculo.dto.VeiculoCondutorDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -22,6 +24,10 @@ public class Veiculo {
     @NotBlank(message = "O modelo do veículo deve ser informado.")
     private String modelo;
 
+    @ManyToOne
+    @JoinColumn(name = "condutor_id", nullable = false)
+    private Condutor condutor;
+
     public Veiculo() {
     }
 
@@ -29,6 +35,14 @@ public class Veiculo {
         this.placa = placa;
         this.marca = marca;
         this.modelo = modelo;
+    }
+
+    public Veiculo (VeiculoCondutorDTO dto, Condutor condutor) {
+        this.id = dto.id();
+        this.marca = dto.marca();
+        this.modelo = dto.modelo();
+        this.placa = dto.placa();
+        this.condutor = condutor;
     }
 
     public Long getId() {
@@ -61,5 +75,13 @@ public class Veiculo {
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
+    }
+
+    public Condutor getCondutor() {
+        return condutor;
+    }
+
+    public void setCondutor(Condutor condutor) {
+        this.condutor = condutor;
     }
 }

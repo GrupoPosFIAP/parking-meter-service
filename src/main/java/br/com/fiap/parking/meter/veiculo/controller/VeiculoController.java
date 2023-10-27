@@ -1,47 +1,60 @@
 package br.com.fiap.parking.meter.veiculo.controller;
 
 import br.com.fiap.parking.meter.core.annotations.PaymentPath;
+import br.com.fiap.parking.meter.veiculo.dto.VeiculoCondutorDTO;
 import br.com.fiap.parking.meter.veiculo.dto.VeiculoDto;
 import br.com.fiap.parking.meter.veiculo.service.VeiculoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/veiculo")
 public class VeiculoController {
 
+    private final VeiculoService veiculoService;
+
+
     @Autowired
-    private VeiculoService veiculoService;
+    public VeiculoController(VeiculoService veiculoService) {
+        this.veiculoService = veiculoService;
+    }
 
 
     @GetMapping
-    public ResponseEntity<Page<VeiculoDto>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
-                                                    @RequestParam(name = "pageSize", defaultValue = "5") int pageSize) {
-        return ResponseEntity.ok(this.veiculoService.findAll(page, pageSize));
+    public ResponseEntity<Page<VeiculoCondutorDTO>> findAll(@RequestParam(name = "page", defaultValue = "0") int page,
+                                                            @RequestParam(name = "pageSize", defaultValue = "5") int pageSize) {
+        PageRequest pageRequest = PageRequest.of(page, pageSize);
+        var veiculos = veiculoService.findAll(pageRequest);
+        return ResponseEntity.ok(veiculos);
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<VeiculoDto> findById(@PathVariable(name = "id") Long id) {
-        VeiculoDto veiculoDto = VeiculoDto.from(this.veiculoService.findById(id));
-        return ResponseEntity.ok(veiculoDto);
+    public ResponseEntity<VeiculoCondutorDTO> findById(@PathVariable(name = "id") Long id) {
+        var  veiculo = veiculoService.findById(id);
+        return ResponseEntity.ok(veiculo);
     }
 
 
     @PostMapping
-    public ResponseEntity<VeiculoDto> insert(@Valid @RequestBody VeiculoDto veiculoDto) {
-        VeiculoDto veiculo = this.veiculoService.insert(veiculoDto);
-        return new ResponseEntity<VeiculoDto>(veiculo, HttpStatus.CREATED);
+    public ResponseEntity<VeiculoCondutorDTO> insert(@Valid @RequestBody VeiculoCondutorDTO dto) {
+        var veiculo = this.veiculoService.insert(dto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand((veiculo.id())).toUri();
+        return ResponseEntity.created(uri).body(veiculo);
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<VeiculoDto> update(@PathVariable(name = "id") Long id, @RequestBody VeiculoDto veiculoDto) {
-        return ResponseEntity.ok(this.veiculoService.update(id, veiculoDto));
+    public ResponseEntity<VeiculoCondutorDTO> update(@PathVariable(name = "id") Long id, @RequestBody VeiculoCondutorDTO dto) {
+        return ResponseEntity.ok(this.veiculoService.update(id, dto));
     }
 
 
