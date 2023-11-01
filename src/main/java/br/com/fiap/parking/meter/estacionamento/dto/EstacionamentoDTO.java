@@ -3,6 +3,9 @@ package br.com.fiap.parking.meter.estacionamento.dto;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import lombok.Builder;
+
+@Builder
 public class EstacionamentoDTO {
 
     private LocalDateTime horarioInicio;

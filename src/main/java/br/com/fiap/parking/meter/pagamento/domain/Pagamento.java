@@ -3,7 +3,6 @@ package br.com.fiap.parking.meter.pagamento.domain;
 import java.math.BigDecimal;
 
 import br.com.fiap.parking.meter.estacionamento.domain.Estacionamento;
-import br.com.fiap.parking.meter.pagamento.FormaPagamento;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,7 +25,7 @@ public class Pagamento {
     @JoinColumn(name = "id")
     private Estacionamento estacionamento;
 
-    private FormaPagamento formaPagamento;
+    private String formaPagamento;
 
     private BigDecimal valorPagamento;
 }
