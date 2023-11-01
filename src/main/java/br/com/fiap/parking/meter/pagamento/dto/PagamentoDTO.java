@@ -1,66 +1,21 @@
 package br.com.fiap.parking.meter.pagamento.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
-public class PagamentoDTO {
+import br.com.fiap.parking.meter.estacionamento.dto.EstacionamentoDTO;
+import br.com.fiap.parking.meter.pagamento.FormaPagamento;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-    private LocalDateTime horarioInicio;
-    private LocalDateTime horarioFim;
-    private BigDecimal valor;
-    private String formaDePagamento; // Pode ser "credito", "debito" ou "pix"
-    private boolean estacionamentoFixo; // Indica se o estacionamento é fixo
-    private boolean tempoRealUtilizado; // Indica se o tempo real foi utilizado
+@Getter
+@AllArgsConstructor
+public class PagamentoDto {
+    
+    private Long id;
 
-    // Getters e Setters
+    private EstacionamentoDTO estacionamento;
 
-    public LocalDateTime getHorarioInicio() {
-        return horarioInicio;
-    }
+    private FormaPagamento formaPagamento;
 
-    public void setHorarioInicio(LocalDateTime horarioInicio) {
-        this.horarioInicio = horarioInicio;
-    }
-
-    public LocalDateTime getHorarioFim() {
-        return horarioFim;
-    }
-
-    public void setHorarioFim(LocalDateTime horarioFim) {
-        this.horarioFim = horarioFim;
-    }
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
-
-    public String getFormaDePagamento() {
-        return formaDePagamento;
-    }
-
-    public void setFormaDePagamento(String formaDePagamento) {
-        this.formaDePagamento = formaDePagamento;
-    }
-
-    public boolean isEstacionamentoFixo() {
-        return estacionamentoFixo;
-    }
-
-    public void setEstacionamentoFixo(boolean estacionamentoFixo) {
-        this.estacionamentoFixo = estacionamentoFixo;
-    }
-
-    public boolean isTempoRealUtilizado() {
-        return tempoRealUtilizado;
-    }
-
-    public void setTempoRealUtilizado(boolean tempoRealUtilizado) {
-        this.tempoRealUtilizado = tempoRealUtilizado;
-    }
-
+    private BigDecimal valorPagamento;
 }
-
