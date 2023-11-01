@@ -18,24 +18,12 @@ public class EstacionamentoController {
     private EstacionamentoService estacionamentoService;
 
     @PostMapping("/iniciar")
-    public ResponseEntity<String> iniciarEstacionamento(@RequestBody EstacionamentoDTO estacionamentoDTO) {
-        String formaDePagamento = estacionamentoDTO.getFormaDePagamento();
-        if (!"credito".equals(formaDePagamento) && !"debito".equals(formaDePagamento)
-                && !"pix".equals(formaDePagamento)) {
-            return ResponseEntity.badRequest().body("A forma de pagamento informada não é válida.");
-        }
-
-        boolean estacionamentoFixo = estacionamentoDTO.isEstacionamentoFixo();
-
-        if ("pix".equals(formaDePagamento) && !estacionamentoFixo) {
-            return ResponseEntity.badRequest()
-                    .body("A opção PIX só está disponível para períodos de estacionamento fixos.");
-        }
-
+    public ResponseEntity<Void> iniciarEstacionamento(@RequestBody EstacionamentoDTO estacionamentoDTO) {
+        estacionamentoService.validarEstacionamento(estacionamentoDTO);
         LocalDateTime horarioInicio = LocalDateTime.now();
         estacionamentoDTO.setHorarioInicio(horarioInicio);
-
-        return ResponseEntity.ok("Estacionamento iniciado com sucesso.");
+        estacionamentoService.iniciarEstacionamento(estacionamentoDTO);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/calcular-pagamento")
