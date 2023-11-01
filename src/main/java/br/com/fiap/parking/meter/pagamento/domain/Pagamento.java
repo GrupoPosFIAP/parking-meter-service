@@ -29,4 +29,8 @@ public class Pagamento {
     private FormaPagamento formaPagamento;
 
     private BigDecimal valorPagamento;
+
+    public Pagamento() {
+
+    }
 }
