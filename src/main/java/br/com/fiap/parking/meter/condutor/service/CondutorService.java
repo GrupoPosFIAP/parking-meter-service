@@ -3,9 +3,14 @@ package br.com.fiap.parking.meter.condutor.service;
 import br.com.fiap.parking.meter.condutor.domain.Condutor;
 import br.com.fiap.parking.meter.condutor.dto.CondutorDto;
 import br.com.fiap.parking.meter.condutor.repository.CondutorRepository;
+import br.com.fiap.parking.meter.exception.ControllerNotFoundException;
 import br.com.fiap.parking.meter.exception.EntityNotFoundException;
+import br.com.fiap.parking.meter.exception.GenericException;
+import br.com.fiap.parking.meter.veiculo.dto.VeiculoCondutorDTO;
+import br.com.fiap.parking.meter.veiculo.dto.VeiculoDto;
 import br.com.fiap.parking.meter.veiculo.repository.VeiculoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -15,14 +20,30 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CondutorService {
 
+    private final CondutorRepository condutorRepository;
+    private final VeiculoRepository veiculoRepository;
+
+
     @Autowired
-    private CondutorRepository condutorRepository;
-
-    public Page<CondutorDto> findAll(int page, int pageSize) {
-
-        Page<Condutor> result = this.condutorRepository.findAll(PageRequest.of(page, pageSize));
-        return result.map(CondutorDto::from);
+    public CondutorService(CondutorRepository condutorRepository, VeiculoRepository veiculoRepository) {
+        this.condutorRepository = condutorRepository;
+        this.veiculoRepository = veiculoRepository;
     }
+
+
+    @Transactional(readOnly = true)
+    public Page<CondutorDto> findAll(PageRequest pageRequest) {
+        var condutores = condutorRepository.findAll(pageRequest);
+        return condutores.map(CondutorDto::from);
+    }
+
+
+    @Transactional(readOnly = true)
+    public Condutor findById(Long id) {
+        return this.condutorRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Condutor não encontrado."));
+    }
+
 
     @Transactional
     public CondutorDto insert(CondutorDto condutorDto) {
@@ -30,14 +51,6 @@ public class CondutorService {
         return CondutorDto.from(condutor);
     }
 
-    @Transactional
-    public void delete(Long id) {
-        this.condutorRepository.deleteById(id);
-    }
-
-    public Condutor findById(Long id) {
-        return this.condutorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Condutor não encontrado."));
-    }
 
     @Transactional
     public CondutorDto update(Long id, CondutorDto condutorDto) {
@@ -50,5 +63,15 @@ public class CondutorService {
         this.condutorRepository.save(condutor);
 
         return condutorDto;
+    }
+
+
+    @Transactional
+    public void delete(Long id) {
+        try {
+            this.condutorRepository.deleteById(id);
+        } catch (GenericException e) {
+            throw new ControllerNotFoundException("Condutor/Veículo não encontrados");
+        }
     }
 }

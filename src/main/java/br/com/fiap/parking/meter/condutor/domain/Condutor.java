@@ -28,6 +28,9 @@ public class Condutor {
     @Email
     private String email;
 
+    @OneToMany(mappedBy = "condutor")
+    private List<Veiculo> veiculos;
+
     public Condutor() {
     }
 
@@ -76,5 +79,9 @@ public class Condutor {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Veiculo> getVeiculos() {
+        return veiculos;
     }
 }

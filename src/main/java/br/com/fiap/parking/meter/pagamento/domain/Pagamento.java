@@ -1,61 +1,38 @@
 package br.com.fiap.parking.meter.pagamento.domain;
-import jakarta.persistence.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
+import br.com.fiap.parking.meter.estacionamento.domain.Estacionamento;
+import br.com.fiap.parking.meter.pagamento.FormaPagamento;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
+@Builder
+@AllArgsConstructor
 @Entity(name = "tb_pagamento")
 public class Pagamento {
-
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDateTime horarioInicio;
-    private LocalDateTime horarioFim;
-    private BigDecimal valor;
+    @OneToOne
+    @JoinColumn(name = "id")
+    private Estacionamento estacionamento;
 
-    @Column(name = "forma_de_pagamento")
-    private String formaDePagamento; // Referência à forma de pagamento
+    private FormaPagamento formaPagamento;
 
-    public Long getId() {
-        return id;
-    }
+    private BigDecimal valorPagamento;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public Pagamento() {
 
-    public LocalDateTime getHorarioInicio() {
-        return horarioInicio;
-    }
-
-    public void setHorarioInicio(LocalDateTime horarioInicio) {
-        this.horarioInicio = horarioInicio;
-    }
-
-    public LocalDateTime getHorarioFim() {
-        return horarioFim;
-    }
-
-    public void setHorarioFim(LocalDateTime horarioFim) {
-        this.horarioFim = horarioFim;
-    }
-
-    public BigDecimal getValor() {
-        return valor;
-    }
-
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
-
-    public String getFormaDePagamento() {
-        return formaDePagamento;
-    }
-
-    public void setFormaDePagamento(String formaDePagamento) {
-        this.formaDePagamento = formaDePagamento;
     }
 }
-
