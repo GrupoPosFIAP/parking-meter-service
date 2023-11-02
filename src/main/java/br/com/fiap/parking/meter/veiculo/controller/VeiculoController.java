@@ -1,14 +1,11 @@
 package br.com.fiap.parking.meter.veiculo.controller;
 
-import br.com.fiap.parking.meter.core.annotations.PaymentPath;
 import br.com.fiap.parking.meter.veiculo.dto.VeiculoCondutorDTO;
-import br.com.fiap.parking.meter.veiculo.dto.VeiculoDto;
 import br.com.fiap.parking.meter.veiculo.service.VeiculoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -59,7 +56,6 @@ public class VeiculoController {
 
 
     @DeleteMapping("/{id}")
-    @PaymentPath
     public ResponseEntity<Void> delete(@RequestHeader(name = "id") Long id) {
         this.veiculoService.delete(id);
         return ResponseEntity.noContent().build();

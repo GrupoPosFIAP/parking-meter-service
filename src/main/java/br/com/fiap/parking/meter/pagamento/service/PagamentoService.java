@@ -7,7 +7,6 @@ import br.com.fiap.parking.meter.estacionamento.repository.EstacionamentoReposit
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.fiap.parking.meter.estacionamento.domain.Estacionamento;
 import br.com.fiap.parking.meter.estacionamento.dto.EstacionamentoDTO;
 import br.com.fiap.parking.meter.pagamento.dto.PagamentoDto;
 import br.com.fiap.parking.meter.pagamento.repository.PagamentoRepository;
