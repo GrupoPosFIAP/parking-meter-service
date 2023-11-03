@@ -23,4 +23,11 @@ public record CondutorDto(Long id, String nome, EnderecoDto endereco, String tel
         );
     }
 
+    public static Condutor mapperDtoToEntity(CondutorDto dto, Condutor entity) {
+        entity.setNome(dto.nome());
+        // entity.setEndereco(dto.endereco());
+        entity.setTelefone(dto.telefone());
+        entity.setEmail(dto.email());
+        return entity;
+    }
 }

@@ -9,11 +9,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
 @Builder
+@AllArgsConstructor
 @Entity(name = "tb_pagamento")
 public class Pagamento {
     
@@ -28,4 +30,8 @@ public class Pagamento {
     private String formaPagamento;
 
     private BigDecimal valorPagamento;
+
+    public Pagamento() {
+
+    }
 }

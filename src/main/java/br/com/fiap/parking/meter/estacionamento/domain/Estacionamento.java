@@ -1,5 +1,9 @@
 package br.com.fiap.parking.meter.estacionamento.domain;
 
+import br.com.fiap.parking.meter.condutor.domain.Condutor;
+import br.com.fiap.parking.meter.estacionamento.dto.EstacionamentoDTO;
+import br.com.fiap.parking.meter.veiculo.domain.Veiculo;
+import br.com.fiap.parking.meter.veiculo.dto.VeiculoCondutorDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -21,6 +25,19 @@ public class Estacionamento {
 
     @Column(name = "forma_de_pagamento")
     private String formaDePagamento; // Referência à forma de pagamento
+
+    @ManyToOne
+    @JoinColumn(name = "veiculo_id")
+    private Veiculo veiculo;
+
+    public Estacionamento(EstacionamentoDTO dto, Veiculo veiculo) {
+        this.horarioInicio = dto.getHorarioInicio();
+        this.horarioFim = dto.getHorarioFim();
+        this.valor = dto.getValor();
+        this.formaDePagamento = dto.getFormaDePagamento();
+        this.veiculo = veiculo;
+    }
+
 
     public Long getId() {
         return id;
