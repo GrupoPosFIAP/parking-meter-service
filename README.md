@@ -209,18 +209,24 @@ horarioInicio | O horário do início do tempo de estacionamento
 ```
 
 
-## Pagamento ( >>> Dúvida <<< )
+## Pagamento 
 
-* Rota POST : http://localhost:8080/estacionamento
+* Rota POST : http://localhost:8080/estacionamento/{id}
   
-  Essa rota é ativada quando finalizar um período de estacionamento retornando.
+  Essa rota é ativada quando finalizar um período de estacionamento retornando. o Id informado é o id do estacionamento finalizado.
 
 ```sh
 {
-    "id": 1
-    "estacionamento": XXX,
-	"formaPagamento": PIX,
-	"valorPagamento": 30,55
+    "id": 1,
+    "estacionamento": {
+        "veiculoId": 0,
+        "horarioInicio": "datetime",
+        "horarioFim": "datetime",
+        "valor": "00,00",
+        "formaDePagamento": "PIX|DEBITO|CREDITO"
+     },
+    "formaPagamento": PIX,
+     "valorPagamento": 30,55
 }
 ```
 
