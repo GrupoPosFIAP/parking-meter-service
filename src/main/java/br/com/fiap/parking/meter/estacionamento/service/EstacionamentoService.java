@@ -1,24 +1,19 @@
 package br.com.fiap.parking.meter.estacionamento.service;
 
-import br.com.fiap.parking.meter.estacionamento.dto.EstacionamentoDTO;
-import br.com.fiap.parking.meter.estacionamento.repository.EstacionamentoRepository;
-import br.com.fiap.parking.meter.exception.ControllerNotFoundException;
-import br.com.fiap.parking.meter.exception.EntityNotFoundException;
-import br.com.fiap.parking.meter.exception.GenericException;
-import br.com.fiap.parking.meter.veiculo.dto.VeiculoCondutorDTO;
-import br.com.fiap.parking.meter.veiculo.dto.VeiculoDto;
-import br.com.fiap.parking.meter.veiculo.repository.VeiculoRepository;
-import br.com.fiap.parking.meter.veiculo.service.VeiculoService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
-import br.com.fiap.parking.meter.estacionamento.domain.Estacionamento;
-
 import java.math.BigDecimal;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import br.com.fiap.parking.meter.estacionamento.domain.Estacionamento;
+import br.com.fiap.parking.meter.estacionamento.dto.EstacionamentoDTO;
+import br.com.fiap.parking.meter.estacionamento.repository.EstacionamentoRepository;
+import br.com.fiap.parking.meter.exception.EntityNotFoundException;
+import br.com.fiap.parking.meter.exception.GenericException;
+import br.com.fiap.parking.meter.veiculo.repository.VeiculoRepository;
 
 @Service
 public class EstacionamentoService {
@@ -91,7 +86,7 @@ public class EstacionamentoService {
                 () -> new EntityNotFoundException("Veículo não encontrado.")
         );
         var entity = EstacionamentoDTO.toEntity(estacionamentoDTO, veiculo);
-        var estacionamentoSaved = estacionamentoRepository.save(entity);
+        estacionamentoRepository.save(entity);
     }
 
     public List<Estacionamento> findAll() {
