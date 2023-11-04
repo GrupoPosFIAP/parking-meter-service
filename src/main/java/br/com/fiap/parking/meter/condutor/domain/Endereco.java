@@ -11,17 +11,17 @@ public class Endereco {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "{message.endereco.estado}")
-    @Length(min = 2, max = 2)
+    @NotEmpty(message = "O estado não pode ser vazio.")
+    @Length(min = 2, max = 2, message = "O estado deve conter 2 caracteres.")
     private String estado;
 
-    @NotEmpty(message = "{message.endereco.cidade}")
+    @NotEmpty(message = "A cidade não pode ser vazia.")
     private String cidade;
 
-    @NotEmpty(message = "{message.endereco.bairro}")
+    @NotEmpty(message = "O bairro não pode ser vazio.")
     private String bairro;
 
-    @NotEmpty(message = "{message.endereco.rua}")
+    @NotEmpty(message = "A rua não pode ser vazia.")
     private String rua;
 
     private Integer numero;

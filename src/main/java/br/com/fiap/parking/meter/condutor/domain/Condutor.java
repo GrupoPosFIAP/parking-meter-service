@@ -14,18 +14,18 @@ public class Condutor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty(message = "{message.condutor.nome}")
+    @NotEmpty(message = "Nome do condutor é obrigatório.")
     private String nome;
 
     @OneToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "endereco_id")
     private Endereco endereco;
 
-    @NotEmpty(message = "{message.condutor.telefone}")
+    @NotEmpty(message = "Telefone do condutor é obrigatório.")
     private String telefone;
 
-    @NotEmpty(message = "{message.condutor.email}")
-    @Email
+    @NotEmpty(message = "E-mail do condutor é obrigatório.")
+    @Email(message = "O e-mail deve ser informado em um formato válido.")
     private String email;
 
     @OneToMany(mappedBy = "condutor")
