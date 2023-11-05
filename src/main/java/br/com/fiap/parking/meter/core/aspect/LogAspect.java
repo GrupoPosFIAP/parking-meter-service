@@ -1,5 +1,6 @@
 package br.com.fiap.parking.meter.core.aspect;
 
+import br.com.fiap.parking.meter.core.factory.ObjectMapperFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -21,7 +22,7 @@ public class LogAspect {
     @Around("execution(* br.com.fiap.parking.meter.*.controller.*.*(..) )")
     public Object applicationLogger(ProceedingJoinPoint pjp) throws Throwable {
         String requestId = UUID.randomUUID().toString();
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = ObjectMapperFactory.get();
 
         LogProperties logProperties = new LogProperties(pjp);
         logProperties.setRequestId(requestId);
