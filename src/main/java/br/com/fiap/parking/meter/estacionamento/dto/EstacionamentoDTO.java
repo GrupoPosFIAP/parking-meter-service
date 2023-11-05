@@ -1,13 +1,10 @@
 package br.com.fiap.parking.meter.estacionamento.dto;
 
-import br.com.fiap.parking.meter.condutor.domain.Condutor;
-import br.com.fiap.parking.meter.estacionamento.domain.Estacionamento;
-import br.com.fiap.parking.meter.veiculo.domain.Veiculo;
-import br.com.fiap.parking.meter.veiculo.dto.VeiculoCondutorDTO;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import br.com.fiap.parking.meter.estacionamento.domain.Estacionamento;
+import br.com.fiap.parking.meter.veiculo.domain.Veiculo;
 import lombok.Builder;
 
 @Builder

@@ -1,7 +1,6 @@
 package br.com.fiap.parking.meter.veiculo.dto;
 
 import br.com.fiap.parking.meter.condutor.domain.Condutor;
-import br.com.fiap.parking.meter.condutor.dto.CondutorDto;
 import br.com.fiap.parking.meter.veiculo.domain.Veiculo;
 import jakarta.validation.constraints.NotBlank;
 

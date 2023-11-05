@@ -1,18 +1,16 @@
 package br.com.fiap.parking.meter.veiculo.service;
 
-import br.com.fiap.parking.meter.condutor.repository.CondutorRepository;
-import br.com.fiap.parking.meter.exception.ControllerNotFoundException;
-import br.com.fiap.parking.meter.exception.GenericException;
-import br.com.fiap.parking.meter.veiculo.domain.Veiculo;
-import br.com.fiap.parking.meter.veiculo.dto.VeiculoCondutorDTO;
-import br.com.fiap.parking.meter.veiculo.dto.VeiculoDto;
-import br.com.fiap.parking.meter.veiculo.repository.VeiculoRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import br.com.fiap.parking.meter.condutor.repository.CondutorRepository;
+import br.com.fiap.parking.meter.veiculo.domain.Veiculo;
+import br.com.fiap.parking.meter.veiculo.dto.VeiculoCondutorDTO;
+import br.com.fiap.parking.meter.veiculo.repository.VeiculoRepository;
+import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class VeiculoService {

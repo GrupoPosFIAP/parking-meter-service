@@ -2,11 +2,13 @@ package br.com.fiap.parking.meter.veiculo.domain;
 
 import br.com.fiap.parking.meter.condutor.domain.Condutor;
 import br.com.fiap.parking.meter.veiculo.dto.VeiculoCondutorDTO;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-
-import java.time.LocalDateTime;
 
 @Entity(name = "tb_veiculo")
 public class Veiculo {

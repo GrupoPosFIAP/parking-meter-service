@@ -1,33 +1,26 @@
 package br.com.fiap.parking.meter.condutor.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import br.com.fiap.parking.meter.condutor.domain.Condutor;
 import br.com.fiap.parking.meter.condutor.dto.CondutorDto;
 import br.com.fiap.parking.meter.condutor.repository.CondutorRepository;
 import br.com.fiap.parking.meter.exception.ControllerNotFoundException;
 import br.com.fiap.parking.meter.exception.EntityNotFoundException;
 import br.com.fiap.parking.meter.exception.GenericException;
-import br.com.fiap.parking.meter.veiculo.dto.VeiculoCondutorDTO;
-import br.com.fiap.parking.meter.veiculo.dto.VeiculoDto;
 import br.com.fiap.parking.meter.veiculo.repository.VeiculoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
 public class CondutorService {
 
     private final CondutorRepository condutorRepository;
-    private final VeiculoRepository veiculoRepository;
 
-
-    @Autowired
     public CondutorService(CondutorRepository condutorRepository, VeiculoRepository veiculoRepository) {
         this.condutorRepository = condutorRepository;
-        this.veiculoRepository = veiculoRepository;
     }
 
 

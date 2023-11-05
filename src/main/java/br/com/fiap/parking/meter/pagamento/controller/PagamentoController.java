@@ -8,20 +8,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.fiap.parking.meter.pagamento.dto.PagamentoDto;
 import br.com.fiap.parking.meter.pagamento.service.PagamentoService;
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/pagamento")
 public class PagamentoController {
-
+    
     private final PagamentoService pagamentoService;
 
-    public PagamentoController(PagamentoService pagamentoService) {
-        this.pagamentoService = pagamentoService;
-    }
-
-    @PostMapping("/{id}")
-    private ResponseEntity<PagamentoDto> pagamento(@PathVariable Long id) {
-        var pagamento = pagamentoService.payment(id);
-        return ResponseEntity.ok().body(pagamento);
+    @PostMapping("{id}")
+    public ResponseEntity<PagamentoDto> reciboDePagamento(@PathVariable("id") Long id) {
+        var recibo = pagamentoService.payment(id);
+        return ResponseEntity.ok().body(recibo);
     }
 }
