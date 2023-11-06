@@ -342,10 +342,10 @@ Aplicação sendo executada em 1 instância em momentos que chegam poucas requis
 <img src="/src/main/resources/static/1instancia.png">
 
 Aplicação sendo executada em 10 instâncias em momentos que chegam muitas requisições:
-<img src="/src/main/resources/static/10instancias.png.png">
+<img src="/src/main/resources/static/10instancias.png">
 
 Teste de stress realizado, chegando a 1300 requisições por segundo, todas com sucesso:
-<img src="/src/main/resources/static/1300requests.png.png">
+<img src="/src/main/resources/static/1300requests.png">
 
 ## Dificuldades
 ```
