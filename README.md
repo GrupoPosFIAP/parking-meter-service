@@ -14,6 +14,7 @@ disponibilidade da aplicação mesmo em cenários de alto uso.
 ```
 -Java 17: programação server-side
 -Spring 3: criação API Restfull e serviços
+-Swagger/OpenAPI: Utilizado para criar a documentação dos endpoints
 -Docker: Gerar a imagem da aplicação
 -PostgresSQL: Banco utilizado para persistir os dados (está dentro do Google Cloud SQL)
 -DBeaver: Front-End para o SGBD
@@ -25,10 +26,16 @@ disponibilidade da aplicação mesmo em cenários de alto uso.
 ```
 
 ## Como executar a aplicação
+### Opção 1: Núvem
+```
+- Acessar o swagger da aplicação: https://parking-meter-fio6pykg2q-uc.a.run.app/swagger-ui/index.html
+- Testar via Postman ou outra plataforma de requisições HTTP
+```
+### Opção 2: Local
 ```
 - Clonar o repositório https://github.com/GrupoPosFIAP/parking-meter-service
 - Entrar na pasta raiz do projeto e executar o comando "mvn spring-boot:run"
-- Testar via Postman
+- Testar via Postman ou outra plataforma de requisições HTTP
 ```
 
 ## Endpoints
@@ -37,7 +44,7 @@ disponibilidade da aplicação mesmo em cenários de alto uso.
 * [Pagamento](#pagamento)
 * [Veículo](#veículo)
 
-
+- PS: Mais informações sobre os endpoints podem ser encontradas através do swagger da aplicação, disponibilizado através da url: https://parking-meter-fio6pykg2q-uc.a.run.app/swagger-ui/index.html 
 
 ## Condutor
 
@@ -329,6 +336,16 @@ trabalhar simultâneamente com até 10 instâncias da aplicação.
 Como o Google Cloud Run é uma ferramenta serverless, o gerenciamento das instâncias fica por conta da infraestrutura da Google Cloud, 
 permitindo com que seja possível focar apenas no código, e "esquecer" de questões de infraestrutura do projeto.
 
+Abaixo podemos ver um pouco do poder da escalabilidade horizontal:
+
+Aplicação sendo executada em 1 instância em momentos que chegam poucas requisições:
+<img src="/src/main/resources/static/1instancia.png">
+
+Aplicação sendo executada em 10 instâncias em momentos que chegam muitas requisições:
+<img src="/src/main/resources/static/10instancias.png.png">
+
+Teste de stress realizado, chegando a 1300 requisições por segundo, todas com sucesso:
+<img src="/src/main/resources/static/1300requests.png.png">
 
 ## Dificuldades
 ```
