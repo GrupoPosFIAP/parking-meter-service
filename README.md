@@ -332,7 +332,9 @@ modelo | Modelo do veículo
 ## Escalabilidade horizontal:
 A escalabilidade horizontal ocorre através das ferramentas serverless da Google Cloud. A solução adotada foi a
 disponibilização do serviço dockerizado através da ferramenta Google Cloud Run, que foi pensada inicialmente para 
-trabalhar simultâneamente com até 10 instâncias da aplicação.
+trabalhar simultâneamente com até 10 instâncias da aplicação, sendo esse um valor totalmente modificável para o número 
+mínimo e máximo de instâncias desejadas. Vale ressaltar que adicionamos toda a parte de Continuous Deployment dentro
+do GitHub Actions, permitindo ainda que a quantidade de instâncias sejam configuradas pelo próprio script da pipeline.
 Como o Google Cloud Run é uma ferramenta serverless, o gerenciamento das instâncias fica por conta da infraestrutura da Google Cloud, 
 permitindo com que seja possível focar apenas no código, e "esquecer" de questões de infraestrutura do projeto.
 
