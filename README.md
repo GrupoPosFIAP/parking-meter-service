@@ -169,7 +169,7 @@ Essa rota faz a exclusão de condutor pelo id:
   
 
 
-## Estacionamento ( >>> Dúvida <<< )
+## Estacionamento 
 
 * Rota POST : http://localhost:8080/iniciar
   
